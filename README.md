@@ -126,6 +126,12 @@ This executes all 5 assessment queries, writes structured outputs to `outputs/re
 pytest -v tests/test_rag.py
 ```
 
+### Step 6: Launch Local Interactive Web UI (Optional)
+```bash
+python app.py
+```
+Open **`http://localhost:8000`** in any browser to query the manual interactively, test preset assessment buttons, or run the full benchmark suite.
+
 ---
 
 ## 5. Assessment Questions & Real Execution Results
@@ -151,6 +157,19 @@ The following outputs are taken directly from the live execution of `python run_
 ### Q5: Who is the current Chief Executive Officer of DJI Innovations?
 - **Answer**: `[not found]`
 - **Sources**: `[]`
+
+### Additional Generic Questions Verified Across the Corpus
+The RAG pipeline is fully generic and answers any arbitrary question grounded in the manual while rejecting unsupported topics:
+- **Battery Capacity & Type:** *"What is the battery capacity and type used in the AeroVantage X9?"*  
+  $\to$ **Answer:** `The AeroVantage X9 utilizes dual 22,000 mAh 6S LiPo smart batteries.` | **Sources:** `[29]`
+- **Low Voltage Warning Threshold:** *"At what voltage per cell is the Stage 1 Low Voltage Warning triggered?"*  
+  $\to$ **Answer:** `The Stage 1 Low Voltage Warning is triggered at 3.60 Volts per cell.` | **Sources:** `[29]`
+- **Critical Auto-Land Cutoff:** *"At what cell voltage does Stage 3 Critical Auto-Land occur?"*  
+  $\to$ **Answer:** `3.30 Volts per cell` | **Sources:** `[29]`
+- **Compass Calibration Clearance:** *"How far away from steel structures must the aircraft be relocated during compass calibration?"*  
+  $\to$ **Answer:** `Relocate the aircraft at least 15 meters away from steel structures and run 6-axis compass calibration.` | **Sources:** `[12]`
+- **Out-of-Corpus Query (Zero Hallucination):** *"Can the AeroVantage X9 be operated in sub-zero temperatures on Mount Everest?"*  
+  $\to$ **Answer:** `[not found]` | **Sources:** `[]`
 
 ---
 
